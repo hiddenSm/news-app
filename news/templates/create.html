@@ -1,0 +1,8 @@
+{% block content %}
+    <h2>Create News</h2>
+    <form method="post" action="{% url 'news_create' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Create</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} News app {% endblock title %}</title>
+</head>
+<body>
+    <div>
+        {% if user.is_authenticated %}
+            <p>Loged In user: {{ user }}</p>
+            <!-- <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit">logout</button>
+            </form> -->
+            <a href="{% url 'logout' %}">Logout</a>    
+            {% for key, val in news.items %}
+                <!-- {% for i in val %}
+                    <a href="#"><p>{{i}}</p></a>
+                {% endfor %} -->
+                <p><a href="{% url 'news_detail' pk=key.pk %}">{{ key }}</a> -- likes: {{ val }}</p>
+                <form method="post" action="{% url 'news_like' pk=key.pk %}">
+                    {% csrf_token %}
+                    <button type="submit">Like</button>
+                </form>
+            {% endfor %}
+
+            <p></p>
+
+            <a href="{% url 'news_create' %}">
+                <button>Create new News</button>
+            </a>
+        {% else %}
+            <p>You are not logged in</p>
+            <p>
+                <a href="{% url 'login' %}"><button type="submit">Log In</button></a>
+            </p>
+        {% endif %}
+    </div>
+</body>
+</html>
