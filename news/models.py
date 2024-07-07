@@ -3,10 +3,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-# mvt
-# news model
-# like and views 
-
 class NewsTest(models.Model):
     title = models.CharField(max_length=256)
     text = models.TextField()
